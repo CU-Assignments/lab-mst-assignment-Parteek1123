@@ -1,0 +1,161 @@
+1 Next Greater Element
+import java.util.HashMap;
+import java.util.Stack;
+
+public class NextGreaterElement {
+    public static int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        Stack<Integer> stack = new Stack<>();
+        
+        for (int num : nums2) {
+            while (!stack.isEmpty() && stack.peek() < num) {
+                map.put(stack.pop(), num);
+            }
+            stack.push(num);
+        }
+        
+        int[] ans = new int[nums1.length];
+        for (int i = 0; i < nums1.length; i++) {
+            ans[i] = map.getOrDefault(nums1[i], -1);
+        }
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        int[] nums1 = {4,1,2};
+        int[] nums2 = {1,3,4,2};
+        int[] result = nextGreaterElement(nums1, nums2);
+        
+        for (int num : result) {
+            System.out.print(num + " ");
+
+
+2. Java Inheritance
+
+class Animal {
+    void makeSound() {
+        System.out.println("Animal makes a sound");
+    }
+}
+
+class Dog extends Animal {
+    void bark() {
+        System.out.println("Dog barks");
+    }
+}
+
+public class InheritanceExample {
+    public static void main(String[] args) {
+        Dog dog = new Dog();
+        dog.makeSound();
+        dog.bark();
+    }
+}
+
+
+3. Encoding Three Strings
+public class EncodeThreeStrings {
+    public static String[] splitString(String str) {
+        int len = str.length();
+        int part1 = len / 3;
+        int part2 = part1;
+        int part3 = part1;
+
+        if (len % 3 == 1) part2++;
+        else if (len % 3 == 2) { part1++; part3++; }
+
+        return new String[]{str.substring(0, part1), str.substring(part1, part1 + part2), str.substring(part1 + part2)};
+    }
+
+    public static String toggleCase(String str) {
+        StringBuilder sb = new StringBuilder();
+        for (char ch : str.toCharArray()) {
+            if (Character.isUpperCase(ch))
+                sb.append(Character.toLowerCase(ch));
+            else
+                sb.append(Character.toUpperCase(ch));
+        }
+        return sb.toString();
+    }
+
+    public static void main(String[] args) {
+        String s1 = "John", s2 = "Johny", s3 = "Janardhan";
+        String[] parts1 = splitString(s1);
+        String[] parts2 = splitString(s2);
+        String[] parts3 = splitString(s3);
+
+        String output1 = parts1[0] + parts2[1] + parts3[2];
+        String output2 = parts1[1] + parts2[2] + parts3[0];
+        String output3 = parts1[2] + parts2[0] + parts3[1];
+
+        output3 = toggleCase(output3);
+
+        System.out.println("Output1: " + output1);
+        System.out.println("Output2: " + output2);
+        System.out.println("Output3: " + output3);
+    }
+}
+
+
+
+        }
+    }
+}
+
+
+4.Method Overloading for Math Operations
+class MathOperations {
+    int add(int a, int b) {
+        return a + b;
+    }
+
+    double add(double a, double b) {
+        return a + b;
+    }
+
+    int multiply(int a, int b) {
+        return a * b;
+    }
+
+    double multiply(double a, double b) {
+        return a * b;
+    }
+}
+
+public class MethodOverloadingExample {
+    public static void main(String[] args) {
+        MathOperations math = new MathOperations();
+        System.out.println("Addition of integers: " + math.add(5, 10));
+        System.out.println("Addition of doubles: " + math.add(5.5, 2.2));
+        System.out.println("Multiplication of integers: " + math.multiply(5, 3));
+        System.out.println("Multiplication of doubles: " + math.multiply(2.5, 4.0));
+    }
+}
+
+5. Alphabet Encoding Based on Numeric Value
+public class AlphabetEncoding {
+    public static String encodeString(String input) {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < input.length(); i++) {
+            char current = input.charAt(i);
+            result.append(current);
+
+            if (Character.isLetter(current) && i < input.length() - 1) {
+                char next = input.charAt(i + 1);
+                if (Character.isLetter(next)) {
+                    int sum = (Character.toLowerCase(current) - 'a' + 1) + (Character.toLowerCase(next) - 'a' + 1);
+                    char appendChar = sum % 26 == 0 ? '0' : (char) ('a' + (sum % 26) - 1);
+                    result.append(appendChar);
+                }
+            }
+        }
+        return result.toString().toLowerCase();
+    }
+
+    public static void main(String[] args) {
+        System.out.println(encodeString("ay"));  // Output: "a0y"
+        System.out.println(encodeString("ac"));  // Output: "adc"
+        System.out.println(encodeString("ac 12a")); // Output: "adc 12a"
+    }
+}
+
